@@ -22,10 +22,10 @@ platforms:
     language: [ Python ]
     graphics: [ Batched Rasterizer & Raytracer ]
     release_year: 2024
-  Genesis:
+  Genesis World:
     url: https://github.com/Genesis-Embodied-AI/Genesis
     target_use_case: Robot Learning
-    physics_engine: [ Genesis ]
+    physics_engine: [ Genesis World ]
     language: [ Python ]
     graphics: [ Batched Rasterizer & Raytracer ]
     release_year: 2025

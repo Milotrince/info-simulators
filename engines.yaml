@@ -111,17 +111,17 @@ engines:
     release_year: 2022
   Newton:
     url: https://github.com/newton-physics/newton
-    integration_method: [ SE ]
+    integration_method: [ EE, IE, SE ]
     articulation: [ CRBA ]
     collision_detection: [ Point ]
     constraint_problem: [ CCP, Soft ]
-    rigid_body_solver: [ Newton, CG, PGS ]
+    rigid_body_solver: [ Newton, CG, PGS, "[Kamino](https://newton-physics.github.io/newton/latest/solvers/kamino.html)" ]
     soft_body_fluid_solver: [ MPM, VBD, XPBD ]
-    parallelization: [ "Multi-scene GPU using [MJWarp](https://github.com/google-deepmind/mujoco_warp)" ]
+    parallelization: [ "Multi-scene GPU using [Warp](https://github.com/NVIDIA/warp)" ]
     differentiable: true
-    developer: NVIDIA
+    developer: Disney Research, Google DeepMind, NVIDIA
     release_year: 2025
-  Genesis:
+  Genesis World:
     url: https://github.com/Genesis-Embodied-AI/Genesis
     integration_method: [ IE, SE ]
     articulation: [ CRBA ]
