@@ -1,0 +1,160 @@
+# Acronyms used in engines.yaml and platforms.yaml, grouped by topic.
+
+glossary:
+  - category: Dynamics
+    topic: Integration Method
+    terms:
+      - acronym: EE
+        name: Explicit Euler
+        url: https://en.wikipedia.org/wiki/Euler_method
+        description: First-order integration updating positions using current velocities; fast but less stable.
+      - acronym: SE
+        name: Semi-implicit Euler
+        url: https://en.wikipedia.org/wiki/Semi-implicit_Euler_method
+        description: Updates velocity before position; almost as fast as Explicit Euler but more stable and roughly conserves energy.
+      - acronym: IE
+        name: Implicit Euler
+        url: https://en.wikipedia.org/wiki/Backward_Euler_method
+        description: Uses derivative of next step; unconditionally stable but requires solving implicit equations.
+      - acronym: RK
+        name: Runge-Kutta
+        url: https://en.wikipedia.org/wiki/Runge–Kutta_methods
+        description: Higher-order integration using intermediate evaluations; good convergence properties, slower per step but can use larger time steps.
+  - category: Dynamics
+    topic: Articulation
+    terms:
+      - acronym: CRBA
+        name: Composite Rigid Body Algorithm
+        url: https://trinityjchung.com/files/Featherstone2008.pdf
+        description: Bottom-up computation of joint-space inertia; efficient for calculating dynamics terms but not accelerations directly.
+      - acronym: ABA
+        name: Articulated Body Algorithm
+        url: https://trinityjchung.com/files/Featherstone2008.pdf
+        description: Two-pass forward dynamics algorithm; very fast for accelerations but does not directly give inertia matrices.
+  - category: Collision Detection
+    topic: Mesh Preprocessing
+    terms:
+      - acronym: VHACD
+        name: Voxelized Hierarchical Approximate Convex Decomposition
+        url: https://www.mathworks.com/help/robotics/ref/collisionvhacd.html
+        description: Decomposes mesh into near convex parts.
+      - acronym: CoACD
+        name: Collision-Aware Convex Decomposition
+        url: https://arxiv.org/pdf/2205.02961
+        description: Better performance and detail preservation than VHACD.
+  - category: Collision Detection
+    topic: Collision Model
+    terms:
+      - name: Point
+        description: Return points of contact.
+      - name: Hydroelastic
+        url: https://medium.com/toyotaresearch/rethinking-contact-simulation-for-robot-manipulation-434a56b5ec88
+        description: Models contact as pressure field.
+  - category: Collision Detection
+    topic: Broad Phase
+    terms:
+      - acronym: SP
+        name: Spatial Partitioning
+        url: https://en.wikipedia.org/wiki/Space_partitioning
+        description: Divides space into uniform cells; efficient for uniformly distributed objects but can degrade with clustering.
+      - acronym: BVH
+        name: Bounding Volume Hierarchy
+        url: https://en.wikipedia.org/wiki/Bounding_volume_hierarchy
+        description: Sparse tree structure; efficient for scenes with variable densities.
+      - acronym: SAP
+        name: Sweep and Prune
+        url: https://en.wikipedia.org/wiki/Sweep_and_prune
+        description: Efficient for dynamic scenes with variable densities.
+  - category: Collision Detection
+    topic: Narrow Phase
+    terms:
+      - name: Primitives
+        description: Use primitive geometries (sphere, box, etc.) for finding intersections. Fastest.
+      - acronym: GJK
+        name: Gilbert–Johnson–Keerthi
+        url: https://en.wikipedia.org/wiki/Gilbert%E2%80%93Johnson%E2%80%93Keerthi_distance_algorithm
+        description: For convex objects; fast distance test.
+      - acronym: EPA
+        name: Expanding Polytope Algorithm
+        url: http://scroll.stanford.edu/courses/cs468-01-fall/Papers/van-den-bergen.pdf
+        description: Extends GJK to compute penetration depth and contact normal.
+      - acronym: MPR
+        name: Minkowski Portal Refinement
+        url: https://en.wikipedia.org/wiki/Minkowski_Portal_Refinement
+        description: Alternative to GJK; similar performance, but does not give separation distance and susceptible to numerical errors.
+      - acronym: SDF
+        name: Signed Distance Fields
+        url: https://en.wikipedia.org/wiki/Signed_distance_function
+        description: Uses precomputable functions instead of mesh to represent the geometry, can be much faster.
+  - category: Constraint Solver
+    topic: Constraint Problem
+    terms:
+      - acronym: LCP
+        name: Linear Complementarity Problem
+        url: https://en.wikipedia.org/wiki/Linear_complementarity_problem
+        description: Exact formulation of contact and constraints; accurate but expensive to solve at scale.
+      - acronym: CCP
+        name: Cone Complementarity Problem
+        url: https://www.mcs.anl.gov/papers/P1161.pdf
+        description: LCP with relaxed complementarity constraint, which makes it a convex optimization problem.
+      - acronym: Soft
+        name: Soft Contact Model
+        url: https://mujoco.readthedocs.io/en/stable/computation/index.html
+        description: MuJoCo's soft contact model, which is CCP with the non-penetration constraint removed.
+      - acronym: SI
+        name: Sequential Impulse
+        url: https://box2d.org/files/ErinCatto_SequentialImpulses_GDC2006.pdf
+        description: Iteratively accumulates impulses on contacts; efficient and widely used in games but only approximate.
+      - acronym: SAP
+        name: Semi-Analytic Primal
+        url: https://arxiv.org/pdf/2110.10107
+        description: Uses linear model of compliant contact forces, faster for complex scenes, has guaranteed global convergence.
+  - category: Constraint Solver
+    topic: Optimizer
+    terms:
+      - acronym: PGS
+        name: Projected Gauss-Seidel
+        url: https://en.wikipedia.org/wiki/Gauss–Seidel_method
+        description: Iterative approximation of LCP; simple and fast but may converge slowly or give artifacts.
+      - acronym: CG
+        name: Conjugate Gradient
+        url: https://en.wikipedia.org/wiki/Conjugate_gradient_method
+        description: First-order; cheaper per iteration than Newton but needs preconditioning and more iterations.
+      - acronym: Newton
+        name: Newton's Method
+        url: https://en.wikipedia.org/wiki/Newton%27s_method_in_optimization
+        description: Second-order with fast convergence; more stable/accurate than PGS/CG but heavier per step.
+  - topic: Soft-body or Fluid Dynamics/Solver
+    terms:
+      - acronym: FEM
+        name: Finite Element Method
+        url: https://en.wikipedia.org/wiki/Finite_element_method
+        description: Numerical method dividing soft bodies into elements to simulate deformation and stresses accurately; very compute-intensive.
+      - acronym: VBD
+        name: Vertex Block Descent
+        url: https://graphics.cs.utah.edu/research/projects/vbd/vbd-siggraph2024.pdf
+        description: Solves elastic deformations via block volume constraints; efficient but less general than FEM.
+      - acronym: IPC
+        name: Incremental Potential Contact
+        url: https://ipc-sim.github.io
+        description: Robust energy-based contact solver for deformables; guarantees non-penetration but costly per step.
+      - acronym: MPM
+        name: Material Point Method
+        url: https://en.wikipedia.org/wiki/Material_point_method
+        description: Particle–grid hybrid for solids and fluids; versatile and accurate but memory and compute heavy.
+      - acronym: PBD
+        name: Position Based Dynamics
+        url: https://matthias-research.github.io/pages/publications/posBasedDyn.pdf
+        description: Iteratively enforces positional constraints; very stable and fast but not physically accurate; can be used to visualize cloth.
+      - acronym: XPBD
+        name: Extended Position Based Dynamics
+        url: https://matthias-research.github.io/pages/publications/XPBD.pdf
+        description: Adds compliance to PBD constraints; retains stability while improving realism.
+      - acronym: SF
+        name: Stable Fluid
+        url: https://pages.cs.wisc.edu/~chaol/data/cs777/stam-stable_fluids.pdf
+        description: Grid-based incompressible flow method; unconditionally stable but diffusive compared to true [Navier-Stokes](https://en.wikipedia.org/wiki/Navier–Stokes_equations).
+      - acronym: SPH
+        name: Smoothed Particle Hydrodynamics
+        url: https://en.wikipedia.org/wiki/Smoothed-particle_hydrodynamics
+        description: Purely particle-based fluids/soft bodies; simple to implement but less stable and less precise.

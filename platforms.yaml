@@ -1,0 +1,80 @@
+# Simulation platforms: a physics engine plus tooling and ecosystem on top.
+# `fields` sets the row order and labels; every platform should have each field.
+
+fields:
+  target_use_case: Target Use Case
+  physics_engine: Physics Engine
+  language: Language
+  graphics: Graphics
+  release_year: Release Year
+platforms:
+  Isaac Sim:
+    url: https://developer.nvidia.com/isaac/sim
+    target_use_case: Robot Learning ~~Sell GPUs~~
+    physics_engine: [ PhysX, Newton ]
+    language: [ C++, Python ]
+    graphics: [ Rasterizer, Raytracer ]
+    release_year: 2022
+  MuJoCo Playground:
+    url: https://playground.mujoco.org/
+    target_use_case: Robot Learning
+    physics_engine: [ MuJoCo ]
+    language: [ Python ]
+    graphics: [ Batched Rasterizer & Raytracer ]
+    release_year: 2024
+  Genesis:
+    url: https://github.com/Genesis-Embodied-AI/Genesis
+    target_use_case: Robot Learning
+    physics_engine: [ Genesis ]
+    language: [ Python ]
+    graphics: [ Batched Rasterizer & Raytracer ]
+    release_year: 2025
+  ManiSkill:
+    url: https://github.com/haosulab/ManiSkill
+    target_use_case: Robot Learning
+    physics_engine: [ PhysX ]
+    language: [ Python ]
+    graphics: [ Rasterizer ]
+    release_year: 2022
+  Drake:
+    url: https://drake.mit.edu/
+    target_use_case: Robotics
+    physics_engine: [ Drake ]
+    language: [ C++, Python ]
+    graphics: [ Rasterizer ]
+    release_year: 2014
+  Gazebo:
+    url: https://gazebosim.org/home
+    target_use_case: Robotics
+    physics_engine: [ Bullet, ODE ]
+    language: [ C++, Python ]
+    graphics: [ Rasterizer ]
+    release_year: 2012
+  Webots:
+    url: https://github.com/cyberbotics/webots
+    target_use_case: Robotics
+    physics_engine: [ ODE ]
+    language: [ C++, Python, Java, MATLAB ]
+    graphics: [ Rasterizer ]
+    release_year: 1998
+  Unity:
+    url: https://unity.com/
+    target_use_case: Game Dev
+    physics_engine: [ PhysX ]
+    language: [ C# ]
+    graphics: [ Rasterizer, Real-time Raytracer ]
+    release_year: 2005
+  Unreal:
+    url: https://www.unrealengine.com/
+    target_use_case: Game Dev
+    physics_engine: [ Chaos ]
+    language: [ C++ ]
+    graphics: [ Rasterizer, Real-time Raytracer ]
+    release_year: 1998
+  Godot:
+    url: https://godotengine.org
+    target_use_case: Game Dev
+    physics_engine: [ Jolt ]
+    language: [ GDScript ]
+    graphics: [ Rasterizer ]
+    release_year: 2014
